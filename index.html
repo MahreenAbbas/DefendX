@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultation Module - DefendX</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+        }
+
+        /* Header and Navbar */
+        header {
+            background-color: red;
+            padding: 1rem 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        #hero {
+            text-align: center;
+            padding: 2rem;
+            background-color: black;
+            color: red;
+            border-bottom: 2px solid red;
+        }
+
+        /* Module Sections */
+        .module-section {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid white;
+        }
+
+        .module-section h2 {
+            color: red;
+            margin-bottom: 1rem;
+        }
+
+        .module-section button,
+        .module-section input,
+        .module-section textarea {
+            padding: 0.7rem;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .module-section input[type="file"] {
+            background-color: white;
+            color: black;
+        }
+
+        .module-section button:hover {
+            background-color: red;
+            color: white;
+        }
+
+        .chatbox {
+            max-width: 500px;
+            margin: 1rem auto;
+            padding: 1rem;
+            border: 1px solid white;
+            background: white;
+            color: black;
+            text-align: left;
+            height: 200px;
+            overflow-y: auto;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: red;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">DefendX</div>
+            <nav>
+                <ul>
+                    <li><a href="#schedule">Schedule</a></li>
+                    <li><a href="#stack">Submit Security Stack</a></li>
+                    <li><a href="#chat">Chat</a></li>
+                    <li><a href="#feedback">Feedback</a></li>
+                    <li><a href="#history">History</a></li>
+                    <li><a href="#reminders">Reminders</a></li>
+                    <li><a href="#follow-up">Follow-Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>Consultation Module</h1>
+            <p>Get expert advice on your cybersecurity architecture with personalized solutions.</p>
+        </section>
+
+        <!-- UC-1: Consultation Scheduling -->
+        <section id="schedule" class="module-section">
+            <h2>Consultation Scheduling</h2>
+            <p>Select a date and time for your consultation.</p>
+            <label for="date">Choose Date:</label>
+            <input type="date" id="date"><br>
+            <label for="time">Choose Time:</label>
+            <input type="time" id="time"><br>
+            <button onclick="scheduleConsultation()">Schedule Now</button>
+            <p id="schedule-msg"></p>
+        </section>
+
+        <!-- UC-2: Security Stack Submission -->
+        <section id="stack" class="module-section">
+            <h2>Security Stack Submission</h2>
+            <p>Upload your security stack for expert review.</p>
+            <input type="file" id="file-upload"><br>
+            <button onclick="uploadFile()">Submit</button>
+            <p id="upload-msg"></p>
+        </section>
+
+        <!-- UC-3: Real-Time Chat -->
+        <section id="chat" class="module-section">
+            <h2>Real-Time Chat</h2>
+            <div class="chatbox" id="chatbox"></div>
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </section>
+
+        <!-- UC-4: Post-Consultation Feedback -->
+        <section id="feedback" class="module-section">
+            <h2>Post-Consultation Feedback</h2>
+            <p>Rate your consultation experience:</p>
+            <textarea id="feedback-text" placeholder="Write your feedback here..."></textarea><br>
+            <button onclick="submitFeedback()">Submit Feedback</button>
+            <p id="feedback-msg"></p>
+        </section>
+
+        <!-- UC-5: Consultation History -->
+        <section id="history" class="module-section">
+            <h2>Consultation History</h2>
+            <button onclick="loadHistory()">View History</button>
+            <ul id="history-list"></ul>
+        </section>
+
+        <!-- UC-6: Consultation Reminders -->
+        <section id="reminders" class="module-section">
+            <h2>Consultation Reminders</h2>
+            <p>Set a reminder for your next consultation.</p>
+            <label for="reminder-date">Reminder Date:</label>
+            <input type="date" id="reminder-date"><br>
+            <label for="reminder-time">Reminder Time:</label>
+            <input type="time" id="reminder-time"><br>
+            <button onclick="setReminder()">Set Reminder</button>
+            <p id="reminder-msg"></p>
+        </section>
+
+        <!-- UC-7: Follow-Up Consultations -->
+        <section id="follow-up" class="module-section">
+            <h2>Follow-Up Consultations</h2>
+            <p>Request a follow-up consultation:</p>
+            <textarea id="follow-up-text" placeholder="Describe your follow-up request..."></textarea><br>
+            <button onclick="requestFollowUp()">Request Follow-Up</button>
+            <p id="follow-up-msg"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 DefendX. All rights reserved.</p>
+    </footer>
+    <script>
+      function scheduleConsultation() {
+          const date = document.getElementById('date').value;
+          const time = document.getElementById('time').value;
+          document.getElementById('schedule-msg').innerText = `Consultation scheduled on ${date} at ${time}.`;
+      }
+
+      function uploadFile() {
+          const file = document.getElementById('file-upload').files[0];
+          document.getElementById('upload-msg').innerText = file ? `File "${file.name}" uploaded successfully.` : 'No file selected.';
+      }
+
+      function sendMessage() {
+          const chatbox = document.getElementById('chatbox');
+          const input = document.getElementById('chat-input').value;
+          if (input.trim()) {
+              chatbox.innerHTML += `<p><b>You:</b> ${input}</p>`;
+              document.getElementById('chat-input').value = '';
+          }
+      }
+
+      function submitFeedback() {
+          const feedback = document.getElementById('feedback-text').value;
+          document.getElementById('feedback-msg').innerText = feedback ? 'Thank you for your feedback!' : 'Please provide feedback.';
+      }
+
+      function loadHistory() {
+          const history = [
+              'Consultation on 2024-11-01 at 10:00 AM',
+              'Consultation on 2024-11-15 at 3:00 PM'
+          ];
+          const historyList = document.getElementById('history-list');
+          historyList.innerHTML = '';
+          history.forEach(item => {
+              const li = document.createElement('li');
+              li.innerText = item;
+              historyList.appendChild(li);
+          });
+      }
+
+      function setReminder() {
+          const date = document.getElementById('reminder-date').value;
+          const time = document.getElementById('reminder-time').value;
+          document.getElementById('reminder-msg').innerText = `Reminder set for ${date} at ${time}.`;
+      }
+
+      function requestFollowUp() {
+          const request = document.getElementById('follow-up-text').value;
+          document.getElementById('follow-up-msg').innerText = request ? 'Follow-up request sent!' : 'Please provide a request.';
+      }
+  </script>
+</body>
+</html>
